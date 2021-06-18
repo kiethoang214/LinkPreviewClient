@@ -102,21 +102,21 @@ export class HomeComponent {
     window.open(this.linkSubmit);
   }
 
-  //// we create an object that contains coordinates
-  //menuTopLeftPosition = { x: 0, y: 0 }
+  // we create an object that contains coordinates
+  menuTopLeftPosition = { x: 0, y: 0 }
 
-  //// reference to the MatMenuTrigger in the DOM
-  //@ViewChild(MatMenuTrigger, { static: true }) matMenuTrigger: MatMenuTrigger;
+  // reference to the MatMenuTrigger in the DOM
+  @ViewChild(MatMenuTrigger, { static: true }) matMenuTrigger: MatMenuTrigger;
 
-  //onRightClick(event: MouseEvent) {
-  //  // preventDefault avoids to show the visualization of the right-click menu of the browser
-  //  event.preventDefault();
+  onRightClick(event: MouseEvent) {
+    // preventDefault avoids to show the visualization of the right-click menu of the browser
+    event.preventDefault();
 
-  //  // we record the mouse position in our object
-  //  this.menuTopLeftPosition.x = event.clientX;
-  //  this.menuTopLeftPosition.y = event.clientY;
+    // we record the mouse position in our object
+    this.menuTopLeftPosition.x = event.clientX;
+    this.menuTopLeftPosition.y = event.clientY;
 
-  //  // we open the menu
-  //  this.matMenuTrigger.openMenu();
-  //}
+    // we open the menu
+    this.matMenuTrigger.openMenu();
+  }
 }
