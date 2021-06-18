@@ -1,14 +1,89 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<div class="container">
+  <h1>Add a link</h1>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <input type="url" [formControl]="link" />
+      <div *ngIf="link.invalid && (link.touched)"
+           class="alert alert-danger">
+        <div *ngIf="link.errors.required">
+          Link is required.
+        </div>
+      </div>
+      <br />
+      <button type="submit" [disabled]="link.invalid">Submit</button>
+    </div>
+  </form>
+  <br />
+
+  <ng-container [ngSwitch]="type">
+    <div *ngSwitchCase="typeEnum.Image" (contextmenu)="onRightClick($event)">
+      <mat-card class="preview" (click)="redirect()">
+        <img class="cropped" mat-card-image [src]="linkSubmit">
+        <mat-card-content>
+          <mat-card-subtitle>
+            <mat-icon> insert_link</mat-icon><a [href]="linkSubmit" [innerHTML]="linkShow"></a>
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div *ngSwitchCase="typeEnum.Pdf" (contextmenu)="onRightClick($event)">
+      <mat-card class="preview" (click)="redirect()">
+        <mat-card-content>
+          <mat-card-subtitle>
+            <mat-icon>picture_as_pdf</mat-icon><a [href]="linkSubmit" [innerHTML]="linkShow"></a>
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <div *ngSwitchCase="typeEnum.Word" (contextmenu)="onRightClick($event)">
+      <mat-card class="preview" (click)="redirect()">
+        <mat-card-content>
+          <mat-card-subtitle>
+            <img src="https://img.icons8.com/metro/26/000000/ms-word.png" /><a [href]="linkSubmit">{{ linkShow }}</a>
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <div *ngSwitchCase="typeEnum.Binary" (contextmenu)="onRightClick($event)">
+      <mat-card class="preview" (click)="redirect()">
+        <mat-card-content>
+          <mat-icon> insert_drive_file</mat-icon><a [href]="linkSubmit" [innerHTML]="linkShow"></a>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div *ngSwitchCase="typeEnum.Link" class="preview" [title]="preview.url" (contextmenu)="onRightClick($event)">
+      <mat-card class="preview" (click)="redirect()">
+        <img class="cropped" mat-card-image [src]="preview.image">
+        <mat-card-content>
+          <mat-card-title>
+            <p [innerHTML]="preview.title"></p>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <p [innerHTML]="preview.description"></p>
+          </mat-card-subtitle>
+          <mat-card-subtitle>
+            <a [href]="preview.url" [innerHTML]="linkShow"></a>
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <!-- an hidden div is created to set the position of appearance of the menu-->
+  <!--<div style="visibility: hidden; position: fixed;"
+       [style.left.px]="menuTopLeftPosition.x"
+       [style.top.px]="menuTopLeftPosition.y"
+       [matMenuTriggerFor]="rightMenu"></div>-->
+  <!--standar material menu-->
+  <!--<mat-menu #rightMenu="matMenu">
+    <button mat-menu-item>Copy link</button>
+  </mat-menu>-->
+
+
+</div>
