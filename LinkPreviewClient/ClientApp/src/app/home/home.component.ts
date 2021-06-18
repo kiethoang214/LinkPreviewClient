@@ -33,7 +33,7 @@ export class HomeComponent {
 
   public type = this.typeEnum.None;
 
-  private linkSubmit = '';
+  private linkSubmit: any;
 
   private linkShow: any;
 
@@ -118,5 +118,11 @@ export class HomeComponent {
 
     // we open the menu
     this.matMenuTrigger.openMenu();
+  }
+
+  copyLink() {
+    var copyText = this.linkSubmit;
+    copyText.select();
+    document.execCommand("copy");
   }
 }

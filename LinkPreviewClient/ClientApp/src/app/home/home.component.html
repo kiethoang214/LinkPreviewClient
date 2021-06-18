@@ -82,7 +82,7 @@
        [matMenuTriggerFor]="rightMenu"></div>
   <!--standar material menu-->
   <mat-menu #rightMenu="matMenu">
-    <button mat-menu-item>Copy link</button>
+    <button (click)="copyLink()" mat-menu-item >Copy link</button>
   </mat-menu>
 
 
