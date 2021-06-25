@@ -1,9 +1,10 @@
-.preview {
+.clickable {
   max-width: 320px;
+
 }
 
 .cropped {
-  width: 305x;
+  width: 305px;
   height: 160px;
   object-fit: cover;
   object-position: 40% 100%;
@@ -11,6 +12,7 @@
 
 .mat-card {
   cursor: pointer;
+  pointer-events: auto;
 }
 
 p {

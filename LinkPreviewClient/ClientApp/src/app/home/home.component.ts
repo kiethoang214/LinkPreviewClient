@@ -6,6 +6,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { ViewChild } from '@angular/core';
 
 
+
 export interface LinkPreview {
   description: string;
   image: string;
@@ -18,6 +19,8 @@ export interface LinkPreview {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
 export class HomeComponent {
 
   preview: LinkPreview = {          // JSON format
@@ -98,10 +101,6 @@ export class HomeComponent {
     }
   }
 
-  public redirect() {
-    window.open(this.linkSubmit);
-  }
-
   // we create an object that contains coordinates
   menuTopLeftPosition = { x: 0, y: 0 }
 
@@ -121,8 +120,16 @@ export class HomeComponent {
   }
 
   copyLink() {
-    var copyText = this.linkSubmit;
-    copyText.select();
-    document.execCommand("copy");
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.linkSubmit;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
   }
 }
