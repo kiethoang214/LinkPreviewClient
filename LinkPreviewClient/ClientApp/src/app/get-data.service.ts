@@ -7,23 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class GetDataService {
 
-  private REST_API_SERVER = 'https://localhost:5001/WeatherForecast'
+  private REST_API_SERVER = 'https://localhost:5001/WeatherForecast/getWebContent/'
 
   constructor(private httpClient: HttpClient) { }
 
   public getData(link): Observable<any> {
-    const params = new HttpParams()
-      .set('link', link);
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      params: new HttpParams().set('link', link)
-    };
+    const urlServer = `${this.REST_API_SERVER}` + encodeURIComponent(link);
+     
 
-    const urlServer = `${this.REST_API_SERVER}`;
-
-    return this.httpClient.get<any>(urlServer, httpOptions);
+    return this.httpClient.get<any>(urlServer,
+      {
+        params: new HttpParams()
+          .set('link', link.toString())
+      });
   }
 }
