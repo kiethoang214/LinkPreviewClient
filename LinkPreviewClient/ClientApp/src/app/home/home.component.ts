@@ -104,9 +104,8 @@ export class HomeComponent {
   // we create an object that contains coordinates
   menuTopLeftPosition = { x: 0, y: 0 }
 
-  // reference to the MatMenuTrigger in the DOM
-  @ViewChild(MatMenuTrigger, { static: true }) matMenuTrigger: MatMenuTrigger;
-
+  //// reference to the MatMenuTrigger in the DOM
+  @ViewChild('rightClickMenuTrigger', { static: false }) rightClickMenuTrigger: MatMenuTrigger;
   onRightClick(event: MouseEvent) {
     // preventDefault avoids to show the visualization of the right-click menu of the browser
     event.preventDefault();
@@ -116,7 +115,7 @@ export class HomeComponent {
     this.menuTopLeftPosition.y = event.clientY;
 
     // we open the menu
-    this.matMenuTrigger.openMenu();
+    this.rightClickMenuTrigger.openMenu();
   }
 
   copyLink() {

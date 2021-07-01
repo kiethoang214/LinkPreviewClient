@@ -90,6 +90,7 @@
 
       <!--an hidden div is created to set the position of appearance of the menu-->
       <div style="visibility: hidden; position: fixed;"
+           #rightClickMenuTrigger="matMenuTrigger"
            [style.left.px]="menuTopLeftPosition.x"
            [style.top.px]="menuTopLeftPosition.y"
            [matMenuTriggerFor]="rightMenu"></div>

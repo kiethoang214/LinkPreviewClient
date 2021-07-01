@@ -16,10 +16,6 @@ export class GetDataService {
     const urlServer = `${this.REST_API_SERVER}` + encodeURIComponent(link);
      
 
-    return this.httpClient.get<any>(urlServer,
-      {
-        params: new HttpParams()
-          .set('link', link.toString())
-      });
+    return this.httpClient.get<any>(urlServer);
   }
 }
